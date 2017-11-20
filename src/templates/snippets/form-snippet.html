@@ -1,0 +1,13 @@
+{%if form.errors.non_field_errors%}
+{{form.errors.non_field_errors}}
+{%endif%}
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+  {{form.as_p}}
+
+  <hr>
+
+  {{RestaurantFormSet}}
+  <br>
+  <button type="submit" name="button">Save</button>
+</form>

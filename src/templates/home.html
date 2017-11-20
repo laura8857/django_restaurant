@@ -1,0 +1,24 @@
+{%extends "base.html"%}
+
+{%block content%}
+{{block.super}}
+    <h1>hello wolrd</h1>
+    <p>This is {{html_var}} in the world</p>
+     <p>
+       {%if bool_item%}
+       This is {{num}}
+       {%endif%}
+      </p>
+      <p>
+        {%for x in x_list%}
+        {%if x|divisibleby:2%}
+        hahahaha
+        {%endif%}
+        {{x}} <br>
+        {%endfor%}
+      </p>
+      <p>
+        some item is {{x}}.
+      </p>
+
+{%endblock content%}

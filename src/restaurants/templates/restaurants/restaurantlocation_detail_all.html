@@ -1,0 +1,54 @@
+
+{%extends "base.html"%}
+{%block head_title%}{{object.title}}Restaurants|{{block.super}}{%endblock head_title%}
+{% load static %}
+
+{%block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="container">
+  <div class="row" style="margin-bottom:20px">
+    <div class="col-sm-7">
+      <h1> {{object.title}} <small>{{object.category}}</small></h1>
+      <h4>
+        <strong>{{object.location}}</strong>
+        <small id="address">{{object.address}}</small>
+      </h4>
+      <hr>
+
+        {%for item in object.item_set.all%}
+        <p style="margin-bottom:15px">{{item.name}}<br>
+              {%for ing in item.get_contents%}
+              <span class="badge badge-default">{{ing}}</span>
+              {%endfor%}
+              <br>
+              {%for i in item.get_excludes%}
+              <span class="badge badge-default">{{i}}</span>
+              {%endfor%}
+
+              <!-- {%for ing in item.get_contents%}
+              <span style="padding:2px 4px;margin-right:4px;background-color:#ccc">{{ing}}</span>
+              {%endfor%} -->
+        </p>
+        {%endfor%}
+
+    </div>
+    <div class="col-sm-5" >
+      {%if object.cover_image %}
+      <img class="img-fluid" style="height:300px;width:400px" src="{{object.cover_image.url}}" alt="" />
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- <input id="address" type="textbox" value="{{object.address}}"> -->
+
+<div id="map" style="width:100%;height:400px; margin:auto"></div>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ2QOCXAnnT5w9nGF-n7RZvVyCr35sXf8&callback=initMap">
+</script>
+<script src="{% static '/js/restaurant_map.js' %}"></script>
+{%endblock%}

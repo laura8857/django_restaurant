@@ -1,0 +1,43 @@
+
+{%extends "base.html"%}
+{%block head_title%}Restaurant|Map|{{block.super}}{%endblock head_title%}
+{%block content%}
+{% load static %}
+
+<head>
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <!-- CSS -->
+      <link rel="stylesheet" href="{% static 'css/map.css' %}" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+  {% for obj in object_list%}
+    <br>
+    <div id="store" style="height:50px;">
+      <h1>今天吃『<a href="{{obj.get_absolute_url_all}}">{{obj.title}}</a>』</h1>
+    </div>
+    <div id="floating-panel">
+      {%if obj.address%}
+        <input id="address" type="textbox" value="{{obj.address}}">
+      {%else%}
+        <input id="address" type="textbox" value="101">
+      {%endif%}
+        <input id="submit" type="button" value="Go">
+    </div>
+    <div id="map" style="width:100%;height:400px;"></div>
+    <input id="next" style="height:50px;width:100%;" type="button" value="下一家">
+    <br>
+
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ2QOCXAnnT5w9nGF-n7RZvVyCr35sXf8&callback=initMap">
+    </script>
+    <script src="{% static '/js/map.js' %}"></script>
+
+    {%endfor%}
+</body>
+
+{%endblock%}

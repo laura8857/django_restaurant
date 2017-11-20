@@ -1,0 +1,43 @@
+
+{%extends "base.html"%}
+{%block head_title%}{{form.instance.title}}Restaurants|{{block.super}}{%endblock head_title%}
+{% load static %}
+
+{%block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <div class="container">
+  <div class="row" style="margin-bottom:20px">
+    <div class="col-sm-7">
+      <h1> {{form.instance.title}} <small>{{form.instance.category}}</small></h1>
+      <p>
+        <strong>{{form.instance.location}}</strong>
+      </p>
+      <p id="address",value="{{form.instance.address}}">
+        {{form.instance.address}}
+      </p>
+      <p>
+        建立於{{form.instance.timestamp}}, Update {{form.instance.update|timesince}} ago
+      </p>
+    </div>
+    <div class="col-sm-5" >
+      {%if form.instance.image %}
+      <img class="img-fluid" style="height:300px;width:400px" src="{{form.instance.image.url}}" alt="" />
+      {%endif%}
+    </div>
+  </div>
+</div>
+ -->
+
+
+
+<!-- <input id="address" type="textbox" value="{{form.instance.address}}"> -->
+
+<!-- <div id="map" style="width:100%;height:400px;"></div> -->
+<!-- <hr> -->
+<h3>Make Changes</h3>
+{%include 'snippets/form-snippet.html' with form=form%}
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ2QOCXAnnT5w9nGF-n7RZvVyCr35sXf8&callback=initMap">
+</script>
+<script src="{% static '/js/restaurant_map.js' %}"></script>
+{%endblock%}
