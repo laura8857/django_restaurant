@@ -8,6 +8,7 @@ from .utils import unique_slug_generator
 from .validators import validate_category
 
 from django.core.urlresolvers import reverse
+
 # Create your models here.
 
 from django.contrib import admin
@@ -67,6 +68,12 @@ class RestaurantLocation(models.Model):
         # return f'/restaurants/{self.slug}'
         return reverse('restaurants:detail-all',kwargs={'slug':self.slug})
 
+    def get_absolute_url_post(self):
+        return reverse('restaurants:add-post',kwargs={'slug':self.slug})
+
+    def get_id(self):
+        return self.id
+
     @property
     def title(self):
         return self.name #object.title
@@ -86,30 +93,28 @@ def rl_post_save_receiver(sender,instance,created,*args,**kwargs):
         instance.slug = unique_slug_generator(instance)
         instance.save()
 
-class Photo(models.Model):
-    restaurant = models.ForeignKey(RestaurantLocation)
-    title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='static/media/')
-    caption = models.CharField(max_length=250, blank=True)
+# class Photo(models.Model):
+#     # associations
+#     owner           = models.ForeignKey(settings.AUTH_USER_MODEL)
+#     restaurant      = models.ForeignKey(RestaurantLocation)
+#
+#     title           = models.CharField("照片標題",max_length=100,default='')
+#     image           = models.ImageField("上傳照片",upload_to='static/media/')
+#     caption         = models.CharField("照片說明",max_length=250,blank=True,default='')
+#     timestamp       = models.DateTimeField(auto_now_add=True)
+#
+#
+#     def __str__(self):
+#         return self.title
+#
+#
+#     def get_absolute_url(self):
+#         return reverse('restaurants:detail',kwargs={'slug':self.restaurant.slug})
+#
+#     class Meta:
+#         ordering = ['-timestamp']
 
-    class Meta:
-        ordering = ["title"]
 
-    def __unicode__(self):
-        return self.title
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('photo_detail', None, {'object_id':self.id})
-
-    def __unicode__(self):
-        return self.image
-
-class PhotoInline(admin.StackedInline):
-    model = Photo
-
-class RestaurantLocationAdmin(admin.ModelAdmin):
-    inlines = [PhotoInline]
 
 
 pre_save.connect(rl_pre_save_receiver, sender=RestaurantLocation)

@@ -6,7 +6,7 @@ from django.shortcuts import render,get_object_or_404
 from django.views import View
 from django.views.generic import TemplateView,ListView,DetailView,CreateView, UpdateView
 from .models import RestaurantLocation
-from .forms import RestaurantCreateForm,RestaurantLocationCreateForm,RestaurantFormSet
+from .forms import RestaurantCreateForm,RestaurantLocationCreateForm, PostForm
 import random
 
 # from django.conf import settings
@@ -171,7 +171,8 @@ class RestaurantDetailView(LoginRequiredMixin,DetailView):
         return context
 
     def get_queryset(self):
-        return RestaurantLocation.objects.filter(owner = self.request.user)
+        # return RestaurantLocation.objects.filter(owner = self.request.user)
+        return RestaurantLocation.objects.all()
 
 class RestaurantDetailViewAll(LoginRequiredMixin,DetailView):
     template_name = '/Users/laura/django/d_venv/src/restaurants/templates/restaurants/restaurantlocation_detail_all.html'
@@ -222,10 +223,10 @@ class RestaurantCreateView(LoginRequiredMixin,CreateView):
         context = super(RestaurantCreateView,self).get_context_data(*args,**kwargs)
         context['title'] = 'Add Restaurant'
 
-        if self.request.method == 'POST':
-            context['RestaurantFormSet'] = RestaurantFormSet(self.request.POST)
-        else:
-            context['RestaurantFormSet'] = RestaurantFormSet()
+        # if self.request.method == 'POST':
+        #     context['RestaurantFormSet'] = RestaurantFormSet(self.request.POST)
+        # else:
+        #     context['RestaurantFormSet'] = RestaurantFormSet()
 
         return context
 
@@ -242,10 +243,10 @@ class RestaurantUpdateView(LoginRequiredMixin,UpdateView):
         name = self.get_object().name
         context['title'] = f'Update Restaurant: {name}'
 
-        if self.request.method == 'POST':
-            context['RestaurantFormSet'] = RestaurantFormSet(self.request.POST)
-        else:
-            context['RestaurantFormSet'] = RestaurantFormSet()
+        # if self.request.method == 'POST':
+        #     context['RestaurantFormSet'] = RestaurantFormSet(self.request.POST)
+        # else:
+        #     context['RestaurantFormSet'] = RestaurantFormSet()
 
         return context
 
@@ -262,3 +263,23 @@ class RestaurantGoogleMapView(LoginRequiredMixin,ListView):
             return RestaurantLocation.objects.filter(id=random_id)
         else:
             RestaurantLocation.objects.all()
+
+class RestaurantPostView(LoginRequiredMixin,CreateView):
+    form_class =  PostForm
+    template_name = 'form.html'
+    # success_url ='/restaurants/'
+    login_url='/login/'
+
+    def form_valid(self,form):
+        instance = form.save(commit = False)
+        instance.owner = self.request.user
+
+        # instance.save()
+        return super(RestaurantPostView, self).form_valid(form)
+
+    def get_context_data(self,*args,**kwargs):
+        context = super(RestaurantPostView,self).get_context_data(*args,**kwargs)
+        context['title'] = 'Add Post'
+
+        return context
+

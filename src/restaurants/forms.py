@@ -1,6 +1,7 @@
 from django import forms
 
-from .models import RestaurantLocation,Photo
+from .models import RestaurantLocation
+from post.models import Photo
 from .validators import validate_category
 from django.forms import inlineformset_factory
 
@@ -40,22 +41,23 @@ class RestaurantLocationCreateForm(forms.ModelForm):
     #         raise forms.ValidationError("We don't accept edu emails.")
     #     return email
 
-# multi image
-class MultiImageForm(forms.ModelForm):
+#  PostForm
+class PostForm(forms.ModelForm):
 
     class Meta:
         model = Photo
         fields = [
+            'restaurant',
             'title',
             'image',
             'caption'
         ]
 
-RestaurantFormSet = inlineformset_factory(
-    RestaurantLocation,
-    Photo,
-    form=MultiImageForm,
-    extra=1,
-    can_delete=False,
-    can_order=False
-)
+# RestaurantFormSet = inlineformset_factory(
+#     RestaurantLocation,
+#     Photo,
+#     form=MultiImageForm,
+#     extra=1,
+#     can_delete=False,
+#     can_order=False
+# )

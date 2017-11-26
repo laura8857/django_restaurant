@@ -8,7 +8,8 @@ from .views import (
     RestaurantDetailView,
     RestaurantCreateView,
     RestaurantUpdateView,
-    RestaurantDetailViewAll
+    RestaurantDetailViewAll,
+    RestaurantPostView
 
 )
 
@@ -18,5 +19,6 @@ urlpatterns = [
     url(r'^(?P<slug>[\w-]+)/$', RestaurantDetailView.as_view(),name = 'detail'),
     url(r'^(?P<slug>[\w-]+)/update$', RestaurantUpdateView.as_view(),name = 'update-detail'),
     url(r'^(?P<slug>[\w-]+)/all$', RestaurantDetailViewAll.as_view(),name = 'detail-all'),
+    url(r'^(?P<slug>[\w-]+)/add_post$', RestaurantPostView.as_view(),name = 'add-post'),
     # url(r'^(?P<slug>[\w-]+)/edit/$', RestaurantUpdateView.as_view(),name = 'edit')
 ]

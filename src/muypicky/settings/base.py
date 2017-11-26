@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'menus',
     'profiles',
     'django.contrib.gis',
+    'post',
 ]
 # GEOS_LIBRARY_PATH = '/usr/local/lib/libgeos_c.so'
 # GOOGLE_MAPS_API_PASSWORD = 'asdasdasdasdasd'
@@ -126,7 +127,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC' #格林威治時間
+TIME_ZONE = 'Asia/Taipei'
 
 USE_I18N = True
 

@@ -1,0 +1,16 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="src.menus.models.restaurants" />
+          <option value="src.profiles.views.*" />
+          <option value="src.post.models.restaurants" />
+          <option value="src.restaurants.views.post" />
+          <option value="src.restaurants.forms.post" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

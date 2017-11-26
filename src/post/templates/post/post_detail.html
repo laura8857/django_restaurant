@@ -1,0 +1,40 @@
+
+{%extends "base.html"%}
+{%block head_title%}{{object.title}}Restaurants|{{block.super}}{%endblock head_title%}
+{% load static %}
+
+{%block content%}
+
+<link rel="stylesheet" href="{% static '/css/post_detail.css' %}" >
+<br>
+<br>
+
+     <div class="card mb-3">
+         <div class="row">
+
+             <div class="col-sm-7">
+             <img class="card-img-top"  src="{{object.image.url}}" alt="" />
+             </div>
+             <div class="col-sm-5">
+                 <div class="card-body">
+                     <p class="auther"><strong>{{object.owner}}</strong></p>
+                     <hr>
+                     <p class="link"><a  href="{{object.get_absolute_url}}">#{{object.restaurant}}</a></p>
+                     <h3 class="card-text">{{object.title}} </h3>
+                     <p>{{object.caption}}</p>
+                     <h6 class="card-text"><small>建立於{{object.timestamp}}</small></h6>
+                </div>
+             </div>
+             <!--<div class="col-sm-2"></div>-->
+         </div>
+
+     </div>
+
+
+
+
+
+
+
+
+{%endblock%}
