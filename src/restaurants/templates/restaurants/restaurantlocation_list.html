@@ -1,18 +1,35 @@
 
 {%extends "base.html"%}
 {%block head_title%}Restaurants|{{block.super}}{%endblock head_title%}
+{% load static %}
 
 {%block content%}
-<h1>Restaurant List <small><a href="{%url "restaurants:create"%}">Add</a></small></h1>
-<ul>
-  {% for obj in object_list%}
-  <li>  <a href="{{obj.get_absolute_url}}">{{obj}}</a> <br>
-       <!-- <a href="/restaurants/{{obj.slug}}/">{{obj}}</a> <br> -->
-    {{obj.name}} {{obj.location}} {{obj.category}} {{obj.timestamp}} {{obj.update}}</li>
+<link rel="stylesheet" href="{% static '/css/restaurant_list.css' %}" >
+<h1>貪吃名單
+  <a href="{%url "restaurants:create"%}"><img class="add" src="{% static '/media/static/icon/add.png' %}">
+  </a>
+</h1>
 
-    {%empty%}
-    <li><a href="{%url "restaurants:create"%}">Add one</a></li>
+<hr>
+<div class='container'>
+  <div id="portfolio">
+    <div class="gallery">
+      {% for obj in object_list%}
 
-  {%endfor%}
-</ul>
+      <div class="gallery-item" style="background-image: url('{{obj.cover_image.url}}');">
+
+        <h2>{{obj.name}}</h2>
+        <a  href="{{obj.get_absolute_url}}">
+        <div class="item-mask">
+        </div>
+
+        </a>
+      </div>
+
+      {%endfor%}
+
+    </div>
+
+  </div>
+</div>
 {%endblock%}

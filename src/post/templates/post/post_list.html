@@ -1,0 +1,50 @@
+
+{%extends "base.html"%}
+{%block head_title%}Post|{{block.super}}{%endblock head_title%}
+{% load static %}
+
+{%block content%}
+<link rel="stylesheet" href="{% static '/css/map.css' %}" >
+<!--<ul>-->
+  <!--{% for obj in object_list%}-->
+  <!--<li>-->
+    <!--<img  src="{{obj.image.url}}" alt="" />-->
+    <!--{{obj.restaurant}} {{obj.title}} {{obj.timestamp}}</li>-->
+
+  <!--{%endfor%}-->
+<!--</ul>-->
+<div class="row">
+    <div class="col-sm-11">
+        <h2>{{object_list.first.owner}}  <small>{{object_list|length}}則貼文</small></h2>
+    </div>
+    <div class="col-3">
+
+        <a href="{%url "post:create" %}">
+        <img class="add" src="{% static '/media/static/icon/post.png' %}"
+                                                                     style="height:3%; width:3%;">
+        </a>
+    </div>
+</div>
+
+<br>
+<div class="container">
+  <div class="row">
+
+    {% for obj in object_list%}
+
+        <div class="gallery_product col-md-4 col-sm-4 col-xs-6">
+            <figure>
+                <a href="{{obj.get_absolute_url_detail}}">
+                    <img class="img-fluid" id="post_img" src="{{obj.image.url}}" alt="" />
+                </a>
+            </figure>
+          <div class="title">
+              <h3><small>{{obj.title}}</small> <br><small>{{obj.restaurant}}</small></h3>
+
+          </div>
+        </div>
+
+    {%endfor%}
+      </div>
+</div>
+{%endblock%}

@@ -16,7 +16,8 @@
       </h4>
 
       <p>
-        建立於{{object.timestamp}}, Update {{object.update|timesince}} ago
+        <a href="{{object.get_absolute_url_user}}"><strong>{{object.owner}}</strong> </a>
+          建立於{{object.timestamp}} , Update {{object.update|timesince}} ago
           {%if object.owner == request.user%}
         <a href="{{object.get_absolute_url_edit}}">Edit</a>
           {%endif%}
@@ -33,10 +34,12 @@
               <span class="badge badge-default">{{i}}</span>
               {%endfor%}
 
-              <!-- {%for ing in item.get_contents%}
-              <span style="padding:2px 4px;margin-right:4px;background-color:#ccc">{{ing}}</span>
-              {%endfor%} -->
+              <!--<a href="{{object.get_absolute_url_menu}}">修改菜單</a>-->
         </p>
+        {% empty %}
+            {%if object.owner == request.user%}
+            <a href="{%url "menus:create"%}">Add Menu</a>
+            {%endif%}
         {%endfor%}
         <p>
           分享我的貪吃經驗 <a href="{{object.get_absolute_url_post}}">貪吃分享</a>
@@ -45,7 +48,7 @@
     </div>
     <div class="col-sm-5" >
       {%if object.cover_image %}
-      <img class="img-fluid cover" style="height:300px;width:400px" src="{{object.cover_image.url}}" alt="" />
+      <img class="cover" style="height:300px;width:400px" src="{{object.cover_image.url}}" alt="" />
       {%endif%}
     </div>
   </div>
@@ -71,7 +74,9 @@
     <!--</div>-->
 
         <div class="gallery_product col-md-4 col-sm-4 col-xs-6">
+            <a href="{{photo.get_absolute_url_detail}}">
           <img class="img-fluid" src="{{photo.image.url}}" alt="" />
+            </a>
           <div class="title">
             <h3><small>{{photo.title }}</small></h3>
             <!-- <small>{{photo.caption }}</small>-->

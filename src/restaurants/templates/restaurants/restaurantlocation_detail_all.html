@@ -6,6 +6,8 @@
 {%block content%}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    <link rel="stylesheet" href="{% static '/css/map.css' %}" >
+
+<!--restaurant detail-->
 <div class="container">
   <div class="row" style="margin-bottom:20px">
     <div class="col-sm-7">
@@ -14,8 +16,16 @@
         <strong>{{object.location}}</strong>
         <small id="address">{{object.address}}</small>
       </h4>
+        <p>
+            <a href="{{object.get_absolute_url_user}}"><strong>{{object.owner}}</strong> </a>
+                更新於 {{object.update}}
+          {%if object.owner == request.user%}
+        <a href="{{object.get_absolute_url_edit}}">Edit</a>
+          {%endif%}
+      </p>
       <hr>
 
+        <!--item detail-->
         {%for item in object.item_set.all%}
         <p style="margin-bottom:15px">{{item.name}}<br>
               {%for ing in item.get_contents%}
@@ -26,19 +36,19 @@
               <span class="badge badge-default">{{i}}</span>
               {%endfor%}
 
-              <!-- {%for ing in item.get_contents%}
-              <span style="padding:2px 4px;margin-right:4px;background-color:#ccc">{{ing}}</span>
-              {%endfor%} -->
+
         </p>
         {%endfor%}
+        <!--add post-->
         <p>
           分享我的貪吃經驗 <a href="{{object.get_absolute_url_post}}">貪吃分享</a>
         </p>
 
     </div>
+      <!--cover photo-->
     <div class="col-sm-5" >
       {%if object.cover_image %}
-      <img class="img-fluid cover" style="height:300px;width:400px" src="{{object.cover_image.url}}" alt="" />
+      <img class="cover" style="height:300px;width:400px" src="{{object.cover_image.url}}" alt="" />
       {%endif%}
     </div>
   </div>
@@ -46,22 +56,15 @@
 
 
 
-
-
-<!-- <input id="address" type="textbox" value="{{object.address}}"> -->
-
+<!--google map-->
 <div id="map" style="width:100%;height:400px; margin:auto"></div>
 
 <hr>
+<!--post gallery-->
 <div class="container">
   <div class="row">
 
-
-    <!--<h1>1{{object.item_set.all}} 2{{object.photo_set.all}}</h1>-->
     {%for photo in object.photo_set.all%}
-    <!--<div>-->
-      <!--<h1>hello {{photo.title }} <small>{{photo.caption }}</small></h1>-->
-    <!--</div>-->
 
         <div class="gallery_product col-md-4 col-sm-4 col-xs-6">
             <figure>
@@ -74,7 +77,6 @@
             <!-- <small>{{photo.caption }}</small>-->
           </div>
         </div>
-
 
     {%endfor%}
       </div>

@@ -14,15 +14,17 @@
 <hr>
 
 {%if locations%}
+ <div class="row">
 {%for rest in locations %}
-  <div class="row">
 
+  <div class="col-sm-4">
 
-  <div class="col-sm-12">
-    <div class="thumbnail">
+    <div class="thumbnail" style="background: rgba(240, 255, 253, 1);
+    height:150px;">
 
-
-    <h4>{{rest.title}}</h4>
+    <a href="{{rest.get_absolute_url}}">
+        <h4>{{rest.title}}</h4>
+    </a>
     <p> {{rest.location}} | {{rest.category}}</p>
       <ul>
         {%for item in rest.item_set.all%}
@@ -42,10 +44,11 @@
         {%endfor%}
       </ul>
       </div>
-  </div>
-  </div>
-{%endfor%}
 
+  </div>
+
+{%endfor%}
+</div>
 {%else%}
 <p class="lead">
   No Items Found

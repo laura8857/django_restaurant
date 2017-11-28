@@ -17,7 +17,9 @@
              </div>
              <div class="col-sm-5">
                  <div class="card-body">
-                     <p class="auther"><strong>{{object.owner}}</strong></p>
+                     <a href="{{object.restaurant.get_absolute_url_user}}" style="color: black;">
+                         <p class="auther"><strong>{{object.owner}}</strong></p>
+                     </a>
                      <hr>
                      <p class="link"><a  href="{{object.get_absolute_url}}">#{{object.restaurant}}</a></p>
                      <h3 class="card-text">{{object.title}} </h3>

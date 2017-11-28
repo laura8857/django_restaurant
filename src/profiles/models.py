@@ -47,7 +47,7 @@ class Profile(models.Model):
             from_email = settings.DEFAULT_FROM_EMAIL
             message = f'Activated your account here:{path_}'
             recipient_list = [self.user.email]
-            html_message = f'<p>Activated your account here:{path_}</p>'
+            html_message = f'<p>Activated your account here:<a href ="{path_}">{path_}</a></p>'
             sent_mail =send_mail(
                             subject,
                             message,

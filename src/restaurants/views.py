@@ -243,6 +243,7 @@ class RestaurantUpdateView(LoginRequiredMixin,UpdateView):
         name = self.get_object().name
         context['title'] = f'Update Restaurant: {name}'
 
+
         # if self.request.method == 'POST':
         #     context['RestaurantFormSet'] = RestaurantFormSet(self.request.POST)
         # else:

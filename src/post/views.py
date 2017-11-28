@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import Photo
 
 # Create your views here.
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
 
 class PostDetailView(LoginRequiredMixin,DetailView):
@@ -20,3 +20,9 @@ class PostDetailView(LoginRequiredMixin,DetailView):
     def get_queryset(self):
         # return Photo.objects.filter(owner=self.request.user)
         return Photo.objects.all()
+
+
+class PostListView(LoginRequiredMixin,ListView):
+    template_name = '/Users/laura/django/d_venv/src/post/templates/post/post_list.html'
+    def get_queryset(self):
+        return Photo.objects.filter(owner = self.request.user)

@@ -8,7 +8,7 @@ def validate_even(value):
             params={'value': value},
         )
 
-CATEGORIES = ['日式','新疆','韓式','西式','新加坡','小吃','串燒']
+CATEGORIES = ['日式','新疆','韓式','西式','新加坡','小吃','串燒','早餐']
 
 def validate_category(value):
     cat = value.capitalize()

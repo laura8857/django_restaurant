@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from django.views.generic import View,ListView, DetailView, CreateView, UpdateView
 from .models import Item
+from restaurants.models import RestaurantLocation
 
 from .forms import ItemForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -18,6 +19,7 @@ class HomeView(View):
         is_following_user_ids = [x.user.id for x in user.is_following.all()]
         # print(is_following_user_ids)
         qs = Item.objects.filter(user__id__in = is_following_user_ids,public=True)
+        # qs = RestaurantLocation.objects.filter(owner__id__in=is_following_user_ids)
         # print(qs)
 
         return render(request,"menus/home-feed.html",{"object_list":qs})

@@ -1,24 +1,33 @@
 {%extends "base.html"%}
 
 {% block content%}
-<div class="row">
+{% load static %}
+<link rel="stylesheet" href="{% static '/css/home.css' %}" >
+<div class="row text-center">
 
-
-<div class="col-sm-12 text-center">
-  <h1>User Following Feed</h1>
+<h1>Following Feed</h1>
+    <br>
+<div class="gallery">
 
 {% for obj in object_list%}
 
-<div class="thumbnail">
-  <h3><a href="{% url "profile:detail" username=obj.user.username%}">{{obj.user.username}}</a></h3>
-  <h4>{{obj.name}}</h4>
-  <p> <a href="{% url "profile:detail" username=obj.user.username%}?q={{ obj.restaurant.title}}">{{obj.restaurant.title}}</a> |{{obj.restaurant.location}} | {{obj.restaurant.category}}</p>
-<p>
-  <b>{{obj.name}}:</b>
-  {%for ing in obj.get_contents%}
-  <span class="badge badge-default">{{ing}}</span>
-  {%endfor%}
-</p>
+  <!--style="background-image: url('{{obj.restaurant.cover_image.url}}');-->
+<div class="thumbnail gallery-item" style="background-image: url('{{obj.restaurant.cover_image.url}}');">
+
+
+      <p> <a href="{% url "profile:detail" username=obj.user.username%}">{{obj.user.username}}</a> <br>
+        <a href="{{obj.restaurant.get_absolute_url}}">
+        {{obj.restaurant.title}}</a>
+    |{{obj.restaurant.location}} | {{obj.restaurant.category}}</p>
+
+<!--<p>-->
+  <!--<b>{{obj.name}}:</b>-->
+  <!--</p>-->
+  <!--{%for ing in obj.get_contents%}-->
+  <!--<p class="badge badge-default">{{ing}}</p>-->
+  <!--{%endfor%}-->
+    <div class="item-mask">
+        </div>
 
 </div>
 

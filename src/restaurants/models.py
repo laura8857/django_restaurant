@@ -9,6 +9,8 @@ from .validators import validate_category
 
 from django.core.urlresolvers import reverse
 
+# from menus.models import Item
+
 # Create your models here.
 
 from django.contrib import admin
@@ -46,7 +48,7 @@ class RestaurantLocation(models.Model):
     category        = models.CharField("種類",max_length=120, null=True, blank=True, validators=[validate_category])
     timestamp       = models.DateTimeField(auto_now_add=True)
     update          = models.DateTimeField(auto_now=True)
-    cover_image     = models.ImageField("封面",upload_to='static/media/', null=True, blank=True)
+    cover_image     = models.ImageField("封面",upload_to='static/media/', default='static/media/restaurant_no_cover.jpg')
     slug            = models.SlugField(null=True, blank=True)
 
 
@@ -71,6 +73,9 @@ class RestaurantLocation(models.Model):
     def get_absolute_url_post(self):
         return reverse('restaurants:add-post',kwargs={'slug':self.slug})
 
+    def get_absolute_url_user(self):
+        return reverse('profile:detail', kwargs={'username': self.owner.username})
+
     def get_id(self):
         return self.id
 
@@ -93,26 +98,6 @@ def rl_post_save_receiver(sender,instance,created,*args,**kwargs):
         instance.slug = unique_slug_generator(instance)
         instance.save()
 
-# class Photo(models.Model):
-#     # associations
-#     owner           = models.ForeignKey(settings.AUTH_USER_MODEL)
-#     restaurant      = models.ForeignKey(RestaurantLocation)
-#
-#     title           = models.CharField("照片標題",max_length=100,default='')
-#     image           = models.ImageField("上傳照片",upload_to='static/media/')
-#     caption         = models.CharField("照片說明",max_length=250,blank=True,default='')
-#     timestamp       = models.DateTimeField(auto_now_add=True)
-#
-#
-#     def __str__(self):
-#         return self.title
-#
-#
-#     def get_absolute_url(self):
-#         return reverse('restaurants:detail',kwargs={'slug':self.restaurant.slug})
-#
-#     class Meta:
-#         ordering = ['-timestamp']
 
 
 

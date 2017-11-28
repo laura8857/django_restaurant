@@ -19,8 +19,11 @@ class Photo(models.Model):
 
     def __str__(self):
         return self.title
-
-
+    #
+    # def get_absolute_url(self):
+    #     # return f'/restaurants/{self.slug}'
+    #     return reverse('restaurants:detail',kwargs={'owner':self.ow})
+    #
     def get_absolute_url(self):
         return reverse('restaurants:detail',kwargs={'slug':self.restaurant.slug})
 
