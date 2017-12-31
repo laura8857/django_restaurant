@@ -24,18 +24,18 @@ SECRET_KEY = 'p!a0#ndo^-lp14=odpiw=cs@(+6a-k67#y&5hw5wnsk$px#--h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+# 可允許的hosts
+ALLOWED_HOSTS = ['host','127.0.0.1']
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'boat8857@gmail.com'
-EMAIL_HOST_PASSWORD = 'boat0907'
+EMAIL_HOST_USER = '你的email'
+EMAIL_HOST_PASSWORD = '你的密碼'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Boat Hu <boat8857@gmail.com>'
+DEFAULT_FROM_EMAIL = 'email名稱'
 
 ADMINS = (
-    ('Boat Hu ', 'boat8857@gmail.com'),
+    ('信箱名稱 ', 'email'),
 )
 MANAGERS = ADMINS
 
@@ -142,6 +142,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 LOGOUT_REDIRECT_URL ="/login/"
 LOGIN_REDIRECT_URL = "/"

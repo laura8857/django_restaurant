@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView
 
 
 class PostDetailView(LoginRequiredMixin,DetailView):
-    template_name = '/Users/laura/django/d_venv/src/post/templates/post/post_detail.html'
+    template_name = 'post/post_detail.html'
     # success_url ='/restaurants/'
     login_url='/login/'
     def get_context_data(self,*args,**kwargs):
@@ -23,6 +23,6 @@ class PostDetailView(LoginRequiredMixin,DetailView):
 
 
 class PostListView(LoginRequiredMixin,ListView):
-    template_name = '/Users/laura/django/d_venv/src/post/templates/post/post_list.html'
+    template_name = 'post/post_list.html'
     def get_queryset(self):
         return Photo.objects.filter(owner = self.request.user)

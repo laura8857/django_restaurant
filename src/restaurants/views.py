@@ -175,7 +175,7 @@ class RestaurantDetailView(LoginRequiredMixin,DetailView):
         return RestaurantLocation.objects.all()
 
 class RestaurantDetailViewAll(LoginRequiredMixin,DetailView):
-    template_name = '/Users/laura/django/d_venv/src/restaurants/templates/restaurants/restaurantlocation_detail_all.html'
+    template_name = 'restaurants/restaurantlocation_detail_all.html'
 
     # success_url ='/restaurants/'
     login_url='/login/'
@@ -256,7 +256,7 @@ class RestaurantUpdateView(LoginRequiredMixin,UpdateView):
 
 
 class RestaurantGoogleMapView(LoginRequiredMixin,ListView):
-    template_name = '/Users/laura/django/d_venv/src/templates/google_map.html'
+    template_name = 'google_map.html'
     def get_queryset(self):
         num_obj = len(RestaurantLocation.objects.all()) +1
         if num_obj >0:

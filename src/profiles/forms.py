@@ -33,7 +33,9 @@ class RegisterForm(forms.ModelForm):
     def save(self, commit=True):
         # Save the provided password in hashed format
         user = super(RegisterForm, self).save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
+        password = self.cleaned_data['password1']
+        user.set_password(password)
+        print('pd:'+password)
         user.is_active = False
         # create a new user hash for activating email.
 

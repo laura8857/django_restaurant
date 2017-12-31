@@ -9,6 +9,7 @@ from menus.models import Item
 
 from .forms import RegisterForm
 from .models import Profile
+from django.http import HttpResponseRedirect
 User =get_user_model()
 
 
